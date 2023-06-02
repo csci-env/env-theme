@@ -1,0 +1,32 @@
+@import './variables.css';
+
+/* Set the default typography for monospace elements */
+tt,
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--jp-code-font-family);
+  font-size: var(--jp-code-font-size);
+  line-height: var(--jp-code-line-height);
+}
+
+/* Code to change the logo to the Ontario Tech Logo */
+#jp-MainLogo {
+  background-image: url(./images/OTU_logo_words_92x28.png);
+  background-repeat: no-repeat;
+  width: 100px;
+}
+
+#jp-MainLogo > svg {
+  visibility: hidden;
+}
+
+#jp-RetroLogo {
+  background-image: url(./images/OTU_logo_words_139x42.png);
+  background-repeat: no-repeat;
+}
+
+#jp-RetroLogo > svg {
+  visibility: hidden;
+}
