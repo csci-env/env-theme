@@ -36,8 +36,9 @@ fields = ["description", "authors", "urls"]
 artifacts = ["env-theme/labextension"]
 exclude = [".github", "binder"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"env-theme/labextension" = "env_theme-0.1.0.data/data/share/jupyter/labextensions/env-theme"
 [tool.hatch.build.targets.wheel.shared-data]
-"env-theme/labextension" = "share/jupyter/labextensions/env-theme"
 "install.json" = "share/jupyter/labextensions/env-theme/install.json"
 
 [tool.hatch.build.hooks.version]
