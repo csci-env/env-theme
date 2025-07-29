@@ -58,7 +58,7 @@ pre {
   visibility: hidden;
 }
 
-/* BROKEN: Hide console launcher section and unwanted cards */
+/* Hide console launcher section and unwanted cards, doesn't work properly but keep it */
 .jp-Launcher-section[data-category="Console"],
 .jp-LauncherCard[data-category="Console"],
 [data-command="fileeditor:create-new"],
