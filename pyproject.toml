@@ -1,9 +1,15 @@
 [build-system]
-requires = ["hatchling>=1.4.0", "jupyterlab>=3.4.7,<4.0.0", "hatch-nodejs-version"]
+requires = [
+    "hatchling==1.27.0",
+    "hatch-nodejs-version==0.4.0",
+    "hatch-jupyter-builder==0.5.0",
+    "jupyterlab==3.6.3"
+]
 build-backend = "hatchling.build"
 
 [project]
-name = "env-theme"
+name = "csci_env"
+version = "0.1.0"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.7"
@@ -20,37 +26,36 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.11"
 ]
 dependencies = [
+    "jupyter_server>=1.21,<3"
 ]
-dynamic = ["version", "description", "authors", "urls", "keywords"]
-
-[tool.hatch.version]
-source = "nodejs"
 
 [tool.hatch.metadata.hooks.nodejs]
 fields = ["description", "authors", "urls"]
 
 [tool.hatch.build.targets.sdist]
-artifacts = ["env-theme/labextension"]
+artifacts = ["csci_env/labextension"]
 exclude = [".github", "binder"]
 
-[tool.hatch.build.targets.wheel.force-include]
-"env-theme/labextension" = "env_theme-0.1.0.data/data/share/jupyter/labextensions/env-theme"
 [tool.hatch.build.targets.wheel.shared-data]
-"install.json" = "share/jupyter/labextensions/env-theme/install.json"
+"csci_env/labextension" = "share/jupyter/labextensions/csci_env"
+"install.json" = "share/jupyter/labextensions/csci_env/install.json"
+"jupyter-config/server-config" = "etc/jupyter/jupyter_server_config.d"
+"jupyter-config/nb-config" = "etc/jupyter/jupyter_notebook_config.d"
 
 [tool.hatch.build.hooks.version]
-path = "env-theme/_version.py"
+path = "csci_env/_version.py"
 
 [tool.hatch.build.hooks.jupyter-builder]
 dependencies = ["hatch-jupyter-builder>=0.5"]
 build-function = "hatch_jupyter_builder.npm_builder"
 ensured-targets = [
-    "env-theme/labextension/package.json",
+    "csci_env/labextension/static/style.js",
+    "csci_env/labextension/package.json"
 ]
-skip-if-exists = ["env-theme/labextension/static/style.js"]
+skip-if-exists = ["csci_env/labextension/static/style.js"]
 
 [tool.hatch.build.hooks.jupyter-builder.build-kwargs]
 build_cmd = "build:prod"
@@ -60,7 +65,7 @@ npm = ["jlpm"]
 build_cmd = "install:extension"
 npm = ["jlpm"]
 source_dir = "src"
-build_dir = "env-theme/labextension"
+build_dir = "csci_env/labextension"
 
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
@@ -68,6 +73,3 @@ version_cmd = "hatch version"
 [tool.jupyter-releaser.hooks]
 before-build-npm = ["python -m pip install jupyterlab~=3.1", "jlpm", "jlpm build:prod"]
 before-build-python = ["jlpm clean:all"]
-
-[tool.check-wheel-contents]
-ignore = ["W002"]
