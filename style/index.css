@@ -10,10 +10,12 @@
     display: none !important;
 }
 
-/* Hide all notebook cards except C++11 */
-.jp-LauncherCard[data-category="Notebook"]:not([title="C++11"]) {
-    display: none !important;
+
+/* Hide only Python 3 notebook cards (matches "Notebook: Python 3 (ipykernel)" etc.) */
+.jp-LauncherCard[data-category="Notebook"][title*="Python 3"] {
+  display: none !important;
 }
+
 
 /* Hide specific buttons by command ID */
 [data-command="fileeditor:create-new"],
@@ -56,14 +58,4 @@ pre {
 
 #jp-RetroLogo > svg {
   visibility: hidden;
-}
-
-/* BROKEN: Hide console launcher section and unwanted cards */
-.jp-Launcher-section[data-category="Console"],
-.jp-LauncherCard[data-category="Console"],
-[data-command="fileeditor:create-new"],
-[data-command="fileeditor:create-new-markdown"],
-[data-command="fileeditor:create-new-python"],
-[data-command="help:open"] {
-  display: none !important;
 }
